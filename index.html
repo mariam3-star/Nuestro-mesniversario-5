@@ -1,0 +1,582 @@
+<!DOCTYPE html>  <html lang="es">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Nuestro Aniversario</title>  <link rel="preconnect" href="https://fonts.googleapis.com">  
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>  
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Lora:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">  
+
+<style>  
+    /* =========================================  
+       VARIABLES Y RESET  
+       ========================================= */  
+    :root {  
+        --primary-lavender: #E6E6FA;  
+        --dark-lavender: #957dad;  
+        --soft-purple: #B19CD9;  
+        --pastel-pink: #FFD1DC;  
+        --deep-purple: #4B0082;  
+        --text-color: #554a5c;  
+        --cream: #FFFAF0;  
+        --white: #ffffff;  
+        --shadow-soft: 0 10px 30px rgba(108, 92, 122, 0.15);  
+    }  
+
+    * {  
+        margin: 0;  
+        padding: 0;  
+        box-sizing: border-box;  
+    }  
+
+    body {  
+        background-color: var(--primary-lavender);  
+        background-image: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);   
+        background: linear-gradient(to bottom, #f3e7ff, #ffeef5);  
+        font-family: 'Lora', serif;  
+        color: var(--text-color);  
+        overflow-x: hidden;  
+        min-height: 100vh;  
+        position: relative;  
+    }  
+
+    /* =========================================  
+       ANIMACIONES DE FONDO (CORAZONES)  
+       ========================================= */  
+    .bg-hearts {  
+        position: fixed;  
+        top: 0;  
+        left: 0;  
+        width: 100%;  
+        height: 100%;  
+        pointer-events: none;  
+        z-index: 0;  
+        overflow: hidden;  
+    }  
+
+    .bg-heart {  
+        position: absolute;  
+        bottom: -100px;  
+        color: rgba(255, 182, 193, 0.4);  
+        font-size: 2rem;  
+        animation: floatUp 15s linear infinite;  
+    }  
+
+    @keyframes floatUp {  
+        0% { transform: translateY(0) rotate(0deg); opacity: 0; }  
+        10% { opacity: 0.6; }  
+        90% { opacity: 0.6; }  
+        100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }  
+    }  
+
+    /* =========================================  
+       CONTENEDOR PRINCIPAL  
+       ========================================= */  
+    .container {  
+        max-width: 900px;  
+        margin: 0 auto;  
+        padding: 20px;  
+        position: relative;  
+        z-index: 10;  
+    }  
+
+    /* =========================================  
+       ENCABEZADO Y FOTO PRINCIPAL  
+       ========================================= */  
+    header {  
+        text-align: center;  
+        padding: 60px 0 40px;  
+        animation: fadeIn 2s ease-in-out;  
+    }  
+
+    h1 {  
+        font-family: 'Dancing Script', cursive;  
+        font-size: 4.5rem;  
+        color: var(--dark-lavender);  
+        margin-bottom: 20px;  
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);  
+    }  
+
+    .subtitle {  
+        font-family: 'Montserrat', sans-serif;  
+        font-weight: 300;  
+        letter-spacing: 3px;  
+        color: var(--text-color);  
+        margin-bottom: 40px;  
+        text-transform: uppercase;  
+        font-size: 1rem;  
+    }  
+
+    .frame-container {  
+        position: relative;  
+        display: inline-block;  
+        padding: 20px;  
+        background: var(--white);  
+        box-shadow: var(--shadow-soft);  
+        border-radius: 4px;  
+        transform: rotate(-2deg);  
+        transition: transform 0.3s ease;  
+    }  
+
+    .frame-container:hover {  
+        transform: rotate(0deg) scale(1.02);  
+    }  
+
+    .frame-container img {  
+        max-width: 100%;  
+        width: 400px;  
+        height: auto;  
+        border: 1px solid #eee;  
+        display: block;  
+    }  
+
+    /* Ornamentos Florales SVG (Inline) */  
+    .flower-ornament {  
+        position: absolute;  
+        width: 100px;  
+        height: 100px;  
+        z-index: 12;  
+        pointer-events: none;  
+        opacity: 0.8;  
+        /* Animación de flotación suave */  
+        animation: gentleFloat 6s ease-in-out infinite alternate;  
+    }  
+    @keyframes gentleFloat {  
+        from { transform: translateY(0px); }  
+        to { transform: translateY(10px); }  
+    }  
+
+    .flower-top-left { top: -30px; left: -30px; transform: rotate(-45deg); animation-delay: 0s; }  
+    .flower-bottom-right { bottom: -30px; right: -30px; transform: rotate(135deg); animation-delay: 1.5s; }  
+
+    /* =========================================  
+       SECCIÓN CARTA (LETTER)  
+       ========================================= */  
+    .letter-section {  
+        margin: 60px 0;  
+        position: relative;  
+        perspective: 1000px;  
+    }  
+
+    .paper {  
+        background-color: var(--cream);  
+        padding: 60px 40px;  
+        box-shadow: var(--shadow-soft);  
+        border-radius: 8px;  
+        position: relative;  
+        background-image:   
+            linear-gradient(90deg, transparent 39px, #abced4 39px, #abced4 41px, transparent 41px),  
+            linear-gradient(#eee .1em, transparent .1em);  
+        background-size: 100% 2em;  
+        min-height: 300px;  
+        font-family: 'Lora', serif; /* Usamos Lora para que sea elegante y legible */  
+        font-size: 1.1rem;  
+        line-height: 1.8em;  
+        color: #444;  
+        border: 2px solid #fff;  
+        outline: 5px double var(--soft-purple);  
+    }  
+
+    .paper-content p {  
+        margin-bottom: 1.5em;  
+        text-indent: 1.5em;  
+        animation: fadeInText 1.5s ease-out forwards;  
+        opacity: 0;  
+    }  
+
+    @keyframes fadeInText {  
+        from { opacity: 0; transform: translateY(10px); }  
+        to { opacity: 1; transform: translateY(0); }  
+    }  
+
+    /* Aplicar delay escalonado a los párrafos de la carta */  
+    .paper-content p:nth-child(1) { animation-delay: 0.5s; }  
+    .paper-content p:nth-child(2) { animation-delay: 1.5s; }  
+    .paper-content p:nth-child(3) { animation-delay: 2.5s; }  
+    .paper-content p:nth-child(4) { animation-delay: 3.5s; }  
+    .paper-content p:nth-child(5) { animation-delay: 4.5s; }  
+    .paper-content p:nth-child(6) { animation-delay: 5.5s; }  
+    .paper-content p:nth-child(7) { animation-delay: 6.5s; }  
+    /* Para la firma */  
+    .paper-content p:last-child {   
+        animation-delay: 7.5s;   
+        text-align: right;   
+        font-family: 'Dancing Script', cursive;   
+        font-size: 1.8rem;  
+    }  
+
+
+    .tape {  
+        position: absolute;  
+        top: -15px;  
+        left: 50%;  
+        transform: translateX(-50%);  
+        width: 120px;  
+        height: 35px;  
+        background-color: rgba(255,255,255,0.6);  
+        border-left: 1px dashed rgba(0,0,0,0.1);  
+        border-right: 1px dashed rgba(0,0,0,0.1);  
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);  
+    }  
+
+    /* =========================================  
+       GALERÍA DE FOTOS  
+       ========================================= */  
+    .gallery-section {  
+        margin: 80px 0;  
+        text-align: center;  
+    }  
+
+    .section-title {  
+        font-family: 'Dancing Script', cursive;  
+        font-size: 3rem;  
+        color: var(--dark-lavender);  
+        margin-bottom: 40px;  
+        position: relative;  
+        display: inline-block;  
+    }  
+      
+    .section-title::after {  
+        content: '♥';  
+        font-size: 1rem;  
+        color: var(--pastel-pink);  
+        display: block;  
+        margin-top: 5px;  
+    }  
+
+    .gallery-grid {  
+        display: grid;  
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));  
+        gap: 20px;  
+        padding: 10px;  
+    }  
+
+    .photo-card {  
+        background: #fff;  
+        padding: 10px 10px 40px 10px; /* Polaroid style bottom padding */  
+        box-shadow: var(--shadow-soft);  
+        transition: all 0.4s ease;  
+        border-radius: 2px;  
+        position: relative;  
+        overflow: hidden;  
+    }  
+
+    .photo-card:hover {  
+        transform: translateY(-10px) rotate(1deg) scale(1.05); /* Hover zoom */  
+        box-shadow: 0 15px 35px rgba(108, 92, 122, 0.25);  
+        z-index: 5;  
+    }  
+
+    .photo-card img {  
+        width: 100%;  
+        height: 250px;  
+        object-fit: cover;  
+        border-radius: 2px;  
+        filter: sepia(20%);  
+        transition: filter 0.3s;  
+    }  
+
+    .photo-card:hover img {  
+        filter: sepia(0%);  
+    }  
+
+    /* =========================================  
+       25 RAZONES  
+       ========================================= */  
+    .reasons-section {  
+        background: rgba(255, 255, 255, 0.7);  
+        border-radius: 20px;  
+        padding: 50px 30px;  
+        margin: 60px 0;  
+        border: 1px solid rgba(255, 255, 255, 0.9);  
+    }  
+
+    .reasons-grid {  
+        display: grid;  
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));  
+        gap: 20px;  
+        text-align: left;  
+        margin-top: 30px;  
+    }  
+
+    .reason-item {  
+        background: #fff;  
+        padding: 15px 20px;  
+        border-radius: 15px;  
+        box-shadow: 0 4px 10px rgba(0,0,0,0.03);  
+        display: flex;  
+        align-items: center;  
+        transition: transform 0.2s;  
+        border-left: 4px solid var(--soft-purple);  
+        opacity: 0;  
+        animation: fadeInText 1s ease-out forwards;  
+    }  
+      
+    /* Staggered reason list animation */  
+    .reason-item:nth-child(5n+1) { animation-delay: 0.1s; }  
+    .reason-item:nth-child(5n+2) { animation-delay: 0.3s; }  
+    .reason-item:nth-child(5n+3) { animation-delay: 0.5s; }  
+    .reason-item:nth-child(5n+4) { animation-delay: 0.7s; }  
+    .reason-item:nth-child(5n+5) { animation-delay: 0.9s; }  
+
+
+    .reason-item:hover {  
+        transform: scale(1.02);  
+        background: #faf5ff;  
+    }  
+
+    .heart-icon {  
+        color: var(--dark-lavender);  
+        font-size: 1.2rem;  
+        margin-right: 15px;  
+    }  
+
+    /* =========================================  
+       FOOTER  
+       ========================================= */  
+    footer {  
+        text-align: center;  
+        padding: 50px 0;  
+        color: var(--dark-lavender);  
+        font-size: 0.9rem;  
+        opacity: 0.8;  
+    }  
+
+    /* =========================================  
+       CONTROL DE MÚSICA (Invisible pero funcional)  
+       ========================================= */  
+    #music-control {  
+        position: fixed;  
+        bottom: 20px;  
+        right: 20px;  
+        background: rgba(255, 255, 255, 0.8);  
+        padding: 10px;  
+        border-radius: 50%;  
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);  
+        z-index: 100;  
+        cursor: pointer;  
+        width: 40px;  
+        height: 40px;  
+        display: flex;  
+        justify-content: center;  
+        align-items: center;  
+        color: var(--deep-purple);  
+        font-size: 1.2rem;  
+        transition: transform 0.3s;  
+    }  
+    #music-control:hover {  
+        transform: scale(1.1);  
+    }  
+
+    /* =========================================  
+       MEDIA QUERIES (RESPONSIVE)  
+       ========================================= */  
+    @media (max-width: 768px) {  
+        h1 { font-size: 3rem; }  
+        .frame-container img { width: 100%; }  
+        .paper { padding: 40px 20px; font-size: 1rem; }  
+        .reasons-grid { grid-template-columns: 1fr; }  
+    }  
+
+    /* Animaciones */  
+    @keyframes fadeIn {  
+        from { opacity: 0; transform: translateY(20px); }  
+        to { opacity: 1; transform: translateY(0); }  
+    }  
+
+    .fade-in-scroll {  
+        opacity: 0;  
+        transform: translateY(30px);  
+        transition: opacity 1s ease-out, transform 1s ease-out;  
+    }  
+
+    .fade-in-scroll.visible {  
+        opacity: 1;  
+        transform: translateY(0);  
+    }  
+
+</style>
+
+</head>  
+<body>  <audio id="bgmusic" src="musica.mp3" autoplay loop></audio>  
+<div id="music-control" title="Reproducir/Pausar">♫</div>  
+
+<div class="bg-hearts" id="hearts-container"></div>  
+
+<div class="container">  
+
+    <header>  
+        <div class="subtitle">Feliz Aniversario, mi amor</div>  
+        <h1>Juntos por siempre</h1>  
+          
+        <div class="frame-container">  
+            <svg class="flower-ornament flower-top-left" viewBox="0 0 100 100" fill="none" stroke="#B19CD9" stroke-width="2">  
+                <path d="M10,90 Q50,50 90,10 M10,90 Q30,60 20,40 M10,90 Q60,80 80,60 M50,50 Q70,30 90,20" />  
+                <circle cx="20" cy="40" r="3" fill="#E6E6FA" />  
+                <circle cx="80" cy="60" r="3" fill="#E6E6FA" />  
+                <circle cx="90" cy="20" r="3" fill="#E6E6FA" />  
+            </svg>  
+
+            <img src="IMG-20250619-WA....jpg" alt="Foto principal" />  
+
+            <svg class="flower-ornament flower-bottom-right" viewBox="0 0 100 100" fill="none" stroke="#B19CD9" stroke-width="2">  
+                <path d="M10,90 Q50,50 90,10 M10,90 Q30,60 20,40 M10,90 Q60,80 80,60 M50,50 Q70,30 90,20" />  
+                <circle cx="20" cy="40" r="3" fill="#E6E6FA" />  
+                <circle cx="80" cy="60" r="3" fill="#E6E6FA" />  
+                <circle cx="90" cy="20" r="3" fill="#E6E6FA" />  
+            </svg>  
+        </div>  
+    </header>  
+
+    <section class="letter-section fade-in-scroll">  
+        <div class="paper">  
+            <div class="tape"></div>  
+              
+            <div class="paper-content">  
+                  
+                <p>Mi amor,</p>  
+
+                <p>Se que a veces me cuesta abrirme contigo, se que a veces me ves y me sientes apagada, como escondida detrás de mis miedos, y aún así te quedas, aún así me abrazas como si yo nunca fuera una carga para ti, me amas a pesar de todo y no sabes cuánto significa eso para mí.</p>  
+
+                <p>Tú eres la única persona con la que realmente siento paz, la única a la que me dan ganas de contarle todo, incluso cuando me asusta ser vulnerable. Genuinamente eres todo para mi, my little boy, mi bebé, mi Estrellita, el hombre de mis sueños, eres el amor de mi vida y mi hogar.</p>  
+
+                <p>Yo te amo con una intensidad que a veces ni sé cómo explicar, ni podría hacerlo aunque escribiera mil libros. Te amo a pesar de que quiero huir constantemente de todo el mundo, a pesar de que no quisiera estar tanto tiempo en este plano, y eso habla mucho de lo especial que eres para mí. Yo viviría solamente para estar contigo.</p>   
+
+                <p>Te amo porque eres mi lugar seguro, porque me miras como si yo fuera suficiente, porque me sostienes cuando me rompo sin hacerme sentir rota, por lo hermoso que eres tanto emocional cómo físicamente, por tu gran corazón y bondad, por todo lo que te haga ser tú.</p>  
+
+                <p>Sabes que tú eres el amor de mi vida. Mi persona. Mi paz. Gracias por existir, gracias por quedarte conmigo, gracias por amarme incluso en mis días más difíciles, incluso cuando me cierro, incluso cuando no sé cómo dejarte ver todo lo que siento.</p>  
+
+                <p style="text-align: center;">Quiero que lo sepas, yo te amo con toda mi alma. Hoy, mañana y siempre.</p>  
+                <p>Tu Marcito 💜</p>  
+                  
+            </div>  
+        </div>  
+    </section>  
+
+    <section class="gallery-section fade-in-scroll">  
+        <h2 class="section-title">Nuestros Momentos</h2>  
+        <div class="gallery-grid">  
+              
+            <div class="photo-card"><img src="IMG-20250625-WA....jpg" alt="Recuerdo 2" /></div>  
+            <div class="photo-card"><img src="IMG-20250704-WA....jpg" alt="Recuerdo 3" /></div>  
+            <div class="photo-card"><img src="IMG-20250704-WA....jpg" alt="Recuerdo 4" /></div>  
+            <div class="photo-card"><img src="IMG-202501105-WA....jpg" alt="Recuerdo 5" /></div>  
+            <div class="photo-card"><img src="IMG-20250930-11....jpg" alt="Recuerdo 6" /></div>  
+            <div class="photo-card"><img src="IMG-20250619-WA....jpg" alt="Recuerdo 1" /></div>   
+
+        </div>  
+    </section>  
+
+    <section class="reasons-section fade-in-scroll">  
+        <div style="text-align: center;">  
+            <h2 class="section-title">25 razones por las que te amo</h2>  
+        </div>  
+          
+        <div class="reasons-grid">  
+            <div class="reason-item"><span class="heart-icon">♥</span> Tu hermosa sonrisa cada mañana.</div>  
+            <div class="reason-item"><span class="heart-icon">♥</span> La paz que siento cuando me abrazas.</div>  
+            <div class="reason-item"><span class="heart-icon">♥</span> Cómo me haces reír sin intentarlo.</div>  
+            <div class="reason-item"><span class="heart-icon">♥</span> Tu apoyo incondicional en mis sueños.</div>  
+            <div class="reason-item"><span class="heart-icon">♥</span> La forma en que me miras.</div>  
+            <div class="reason-item"><span class="heart-icon">♥</span> Tu inteligencia y curiosidad.</div>  
+            <div class="reason-item"><span class="heart-icon">♥</span> Nuestros momentos de silencio cómodo.</div>  
+            <div class="reason-item"><span class="heart-icon">♥</span> Tu paciencia infinita.</div>  
+            <div class="reason-item"><span class="heart-icon">♥</span> El café que preparas (o intentas preparar).</div>  
+            <div class="reason-item"><span class="heart-icon">♥</span> Cómo cuidas de los demás.</div>  
+            <div class="reason-item"><span class="heart-icon">♥</span> Tus consejos sabios.</div>  
+            <div class="reason-item"><span class="heart-icon">♥</span> La seguridad que me das.</div>  
+            <div class="reason-item"><span class="heart-icon">♥</span> Tu voz que me calma.</div>  
+            <div class="reason-item"><span class="heart-icon">♥</span> Las aventuras que planeamos juntos.</div>  
+            <div class="reason-item"><span class="heart-icon">♥</span> Tu bondad y corazón noble.</div>  
+            <div class="reason-item"><span class="heart-icon">♥</span> Cómo me inspiras a ser mejor.</div>  
+            <div class="reason-item"><span class="heart-icon">♥</span> Tus mensajes de "buenos días".</div>  
+            <div class="reason-item"><span class="heart-icon">♥</span> Nuestra complicidad única.</div>  
+            <div class="reason-item"><span class="heart-icon">♥</span> Tu pasión por lo que haces.</div>  
+            <div class="reason-item"><span class="heart-icon">♥</span> Cómo bailas cuando nadie te ve.</div>  
+            <div class="reason-item"><span class="heart-icon">♥</span> Que eres mi mejor amigo/a.</div>  
+            <div class="reason-item"><span class="heart-icon">♥</span> Tu honestidad siempre.</div>  
+            <div class="reason-item"><span class="heart-icon">♥</span> Lo detallista que eres.</div>  
+            <div class="reason-item"><span class="heart-icon">♥</span> Cómo entiendes mis locuras.</div>  
+            <div class="reason-item"><span class="heart-icon">♥</span> Simplemente porque eres tú.</div>  
+        </div>  
+    </section>  
+
+    <footer>  
+        <p>Hecho con todo mi amor para ti</p>  
+        <p style="font-size: 1.5rem; margin-top: 10px;">♥</p>  
+    </footer>  
+
+</div>  
+
+<script>  
+    // 1. GENERACIÓN DE CORAZONES FLOTANTES  
+    function createHearts() {  
+        const container = document.getElementById('hearts-container');  
+        const heartsCount = 20;  
+
+        for (let i = 0; i < heartsCount; i++) {  
+            const heart = document.createElement('div');  
+            heart.classList.add('bg-heart');  
+            heart.innerHTML = '❤';  
+            heart.style.left = Math.random() * 100 + 'vw';  
+            heart.style.animationDuration = Math.random() * 5 + 10 + 's';  
+            heart.style.animationDelay = Math.random() * 10 + 's';  
+            heart.style.opacity = Math.random() * 0.5 + 0.2;  
+            container.appendChild(heart);  
+        }  
+    }  
+
+    // 2. MANEJO DEL AUDIO (AUTOPLAY FIX)  
+    document.addEventListener('DOMContentLoaded', () => {  
+        const audio = document.getElementById('bgmusic');  
+        const btn = document.getElementById('music-control');  
+          
+        // Intentar reproducir automáticamente  
+        let playPromise = audio.play();  
+
+        if (playPromise !== undefined) {  
+            playPromise.then(_ => {  
+                // Autoplay funcionó  
+                console.log("Audio reproduciendo");  
+            })  
+            .catch(error => {  
+                // Autoplay bloqueado por el navegador  
+                console.log("Autoplay bloqueado. Esperando interacción.");  
+                // Agregar listener a todo el documento para el primer clic  
+                document.body.addEventListener('click', function() {  
+                    audio.play();  
+                }, { once: true });  
+            });  
+        }  
+
+        // Botón manual  
+        btn.addEventListener('click', () => {  
+            if (audio.paused) {  
+                audio.play();  
+            } else {  
+                audio.pause();  
+            }  
+        });  
+
+        createHearts();  
+    });  
+
+    // 3. ANIMACIONES AL HACER SCROLL  
+    const observerOptions = {  
+        threshold: 0.15  
+    };  
+
+    const observer = new IntersectionObserver((entries) => {  
+        entries.forEach(entry => {  
+            if (entry.isIntersecting) {  
+                entry.target.classList.add('visible');  
+            }  
+        });  
+    }, observerOptions);  
+
+    document.querySelectorAll('.fade-in-scroll').forEach(section => {  
+        observer.observe(section);  
+    });  
+</script>
+
+</body>  
+</html>
